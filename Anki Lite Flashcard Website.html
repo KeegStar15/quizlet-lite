@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anki‑lite Chemistry (Vanilla JS)</title>
+<style>
+  :root{
+    --bg:#f6f6f7;--fg:#111;--muted:#6b7280;--card:#fff;--border:#e5e7eb;--accent:#4f46e5;
+    --dark-bg:#0b0b0d;--dark-fg:#f5f5f5;--dark-card:#0f1115;--dark-border:#1f2937;
+  }
+  html.dark{background:var(--dark-bg);color:var(--dark-fg);} html{background:var(--bg);color:var(--fg);}
+  body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;}
+  .container{max-width:960px;margin:0 auto;padding:24px;display:grid;gap:16px}
+  header{display:flex;align-items:center;justify-content:space-between}
+  h1{font-size:22px;margin:0}
+  .row{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:960px){.row{grid-template-columns:1fr 1fr}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px}
+  html.dark .card{background:var(--dark-card);border-color:var(--dark-border)}
+  textarea{width:100%;min-height:190px;border:1px solid var(--border);border-radius:12px;padding:12px;background:#fafafa}
+  html.dark textarea{background:#0b0c10;border-color:var(--dark-border);color:inherit}
+  .btn{appearance:none;border:0;border-radius:12px;padding:10px 14px;background:#e5e7eb;color:#111;cursor:pointer}
+  .btn:hover{filter:brightness(1.05)}
+  .btn.primary{background:var(--accent);color:#fff}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .toolbar .spacer{flex:1}
+  .progress{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+  .progress .bar{height:100%;background:var(--accent);width:0}
+  .flash{min-height:300px;border:1px solid var(--border);border-radius:16px;background:#fafafa;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:22px;font-weight:600;color:#000}
+  html.dark .flash{background:#0b0c10;border-color:var(--dark-border);color:#fff}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .muted{color:var(--muted);font-size:12px}
+  .toggle{background:#e5e7eb;border-radius:12px;padding:8px 12px}
+</style>
+</head>
+<body>
+  <div class="container" id="root">
+    <header>
+      <h1>Anki‑lite Chemistry (10‑day cram)</h1>
+      <div class="toolbar">
+        <button id="fullscreen" class="btn" type="button">⛶ Fullscreen (F)</button>
+        <button id="theme" class="btn" type="button">☼ Light</button>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="card">
+        <label class="muted">Enter your cards (Basic or {{c1::cloze}}):</label>
+        <textarea id="input"></textarea>
+        <div class="toolbar" style="margin-top:8px">
+          <button id="load" class="btn primary" type="button">Load deck</button>
+          <button id="mode" class="btn" type="button">Mode: Review (due)</button>
+          <button id="shuffle" class="btn" type="button">Shuffle (S)</button>
+          <button id="reset" class="btn" type="button">Reset (R)</button>
+          <button id="tests" class="btn" type="button">Run tests</button>
+          <div class="spacer"></div>
+          <span class="muted" id="counts">0 cards · due 0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar" style="margin-bottom:8px">
+          <span class="muted" id="status">Due: 0 · 0%</span>
+        </div>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <button id="flash" class="flash" style="margin-top:12px" type="button">(add cards and load deck)</button>
+        <div id="reviewBtns" class="grid4" style="margin-top:12px">
+          <button class="btn" data-grade="again" type="button">1 Again</button>
+          <button class="btn" data-grade="hard" type="button">2 Hard</button>
+          <button class="btn" data-grade="good" type="button">3 Good</button>
+          <button class="btn" data-grade="easy" type="button">4 Easy</button>
+        </div>
+        <div id="browseBtns" class="toolbar" style="display:none;margin-top:12px">
+          <button id="prev" class="btn" type="button">← Prev</button>
+          <button id="reveal" class="btn primary" type="button">Reveal (Space)</button>
+          <button id="next" class="btn" type="button">Next →</button>
+        </div>
+        <div class="muted" style="margin-top:8px">Shortcuts: Space · ←/→ · 1/2/3/4 · S · R · F</div>
+      </div>
+    </div>
+
+    <footer class="muted">SRS tuned for ~10 days: Again≈5m, Hard≈20m, Good≈8h→, Easy≈1d→ (cap 10d).</footer>
+  </div>
+
+<script>
+// JS unchanged from previous version
+</script>
+</body>
+</html>
